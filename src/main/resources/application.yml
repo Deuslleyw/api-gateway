@@ -1,12 +1,12 @@
 server:
-  port: 8765
+  port: 8762
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8765/eureka
+      defaultZone: http://localhost:8761/eureka
   spring:
     application:
-      name: gateway
+      name: api-gateway
     loud:
      gateway:
         discovery:
@@ -20,4 +20,4 @@ eureka:
           - id: book-service
             uri: lb://book-service
             predicates:
-            - path=/book-service/**
+              - path=/book-service/**
