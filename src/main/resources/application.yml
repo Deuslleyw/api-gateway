@@ -1,15 +1,23 @@
 server:
-  port: 8762
+  port: 8765
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://localhost:8765/eureka
   spring:
     application:
       name: gateway
-    #cloud:
-     # gateway:
-       # discovery:
-        #  locator:
-         #   enabled: true
-          #  lower-case-service-id: true
+    loud:
+     gateway:
+        discovery:
+          locator:
+            enabled: true
+        routes:
+        - id: cambio-service
+          uri: lb://cambio-service
+          predicates:
+          - path=/cambio-service/**
+          - id: book-service
+            uri: lb://book-service
+            predicates:
+            - path=/book-service/**
